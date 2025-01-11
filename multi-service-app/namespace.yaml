@@ -1,0 +1,5 @@
+# The namespace creates an isolated environment for all microservices in it
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: stocks-app

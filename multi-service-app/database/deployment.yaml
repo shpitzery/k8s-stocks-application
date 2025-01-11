@@ -1,0 +1,27 @@
+# Manages mongoDB pod
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+  namespace: stocks-app
+spec:
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo
+          ports:
+            - containerPort: 27017
+          volumeMounts:             # Mount persistent volume to store data
+            - name: mongo-storage
+              mountPath: /data/db   # MongoDB data directory
+      volumes:
+        - name: mongo-storage
+          persistentVolumeClaim:
+            claimName: mongo-pvc    # Name of the persistent volume claim

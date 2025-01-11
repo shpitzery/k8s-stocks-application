@@ -1,0 +1,13 @@
+# Expose stocks pods to other services in the cluster
+apiVersion: v1
+kind: Service
+metadata:
+  name: stocks-service
+  namespace: stocks-app
+spec:
+  selector:
+    app: stocks
+  ports:
+    - port: 8000        # Service exposes port 8000
+      targetPort: 8000  # Container listens on port 8000 (from Dockerfile: EXPOSE 8000)
+  type: ClusterIP       # Expose the service on a cluster-internal IP
