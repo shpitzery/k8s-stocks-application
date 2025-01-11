@@ -1,0 +1,12 @@
+# Claims storage for the database from the PersistentVolume
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pvc
+  namespace: stocks-app
+spec:
+  accessModes:
+    - ReadWriteOnce # Must match PV access mode
+  resources:
+    requests:
+      storage: 1Gi  # Amount of storage requested
