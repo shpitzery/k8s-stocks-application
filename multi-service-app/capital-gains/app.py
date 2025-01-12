@@ -20,7 +20,7 @@ url = 'https://api.api-ninjas.com/v1/stockprice'
 
 def querys_validation(querys):
     # validate query parameters
-    valid_keys = {'portfolio', 'numsharesgt', 'numshareslt'}
+    valid_keys = {'numsharesgt', 'numshareslt'}
     if any(key not in valid_keys for key in querys.keys()):
         return False, {'error': 'Invalid query parameter'}
     
@@ -30,8 +30,6 @@ def querys_validation(querys):
         values = querys.getlist(key) # Get all values for the key
 
         for value in values:
-            if key == 'portfolio' and value not in ['stocks1', 'stocks2']:
-                return False, {'error': 'Invalid portfolio'}
             if key in ['numsharesgt', 'numshareslt']:
                 try:
                     int(value)
@@ -57,23 +55,25 @@ def get_capital_gains():
             if not is_valid:
                 return jsonify(err), 400
             
-            portfolio_querys_values = querys.getlist('portfolio') # This list can be: ['stocks1'], ['stocks2'], ['stocks1', 'stocks2'], or []
-            if portfolio_querys_values == ['stocks1']:
-                portfolio1 = requests.get('http://stocks1-a:8000/stocks')
-                portfolio1.raise_for_status()
-                collection = portfolio1.json()
-                capital_gains = portfolio_val(collection, querys)
-                return jsonify(capital_gains), 200
+            # portfolio_querys_values = querys.getlist('portfolio') # This list can be: ['stocks1'], ['stocks2'], ['stocks1', 'stocks2'], or []
+            # if portfolio_querys_values == ['stocks1']:
+            #     portfolio1 = requests.get('http://stocks-service:8000/stocks')
+            #     portfolio1.raise_for_status()
+            #     collection = portfolio1.json()
+            #     capital_gains = portfolio_val(collection, querys)
+            #     return jsonify(capital_gains), 200
 
-            elif portfolio_querys_values == ['stocks2']:
-                portfolio2 = requests.get('http://stocks2:8000/stocks')
-                portfolio2.raise_for_status()
-                collection = portfolio2.json()
-                capital_gains = portfolio_val(collection, querys)
-                return jsonify(capital_gains), 200
+            # elif portfolio_querys_values == ['stocks2']:
+            #     portfolio2 = requests.get('http://stocks2:8000/stocks')
+            #     portfolio2.raise_for_status()
+            #     collection = portfolio2.json()
+            #     capital_gains = portfolio_val(collection, querys)
+            #     return jsonify(capital_gains), 200
 
-        # If no query parameters are provided or portfolio_querys_values == ['stocks1', 'stocks2']
-        collection = both_services_use()
+        # collection = both_services_use()
+        response = requests.get('http://stocks-service:8000/stocks')
+        response.raise_for_status()
+        collection = response.json()
         capital_gains = portfolio_val(collection, querys)
         return jsonify(capital_gains), 200
             
@@ -81,17 +81,17 @@ def get_capital_gains():
         return jsonify({'error': str(e)}), 500
     
 
-def both_services_use():
-    portfolio1 = requests.get('http://stocks1-a:8000/stocks')
-    portfolio1.raise_for_status()
-    collection1 = portfolio1.json()
+# def both_services_use():
+#     portfolio1 = requests.get('http://stocks1-a:8000/stocks')
+#     portfolio1.raise_for_status()
+#     collection1 = portfolio1.json()
 
-    portfolio2 = requests.get('http://stocks2:8000/stocks')
-    portfolio2.raise_for_status()
-    collection2 = portfolio2.json()
+#     portfolio2 = requests.get('http://stocks2:8000/stocks')
+#     portfolio2.raise_for_status()
+#     collection2 = portfolio2.json()
 
-    collection = collection1 + collection2
-    return collection
+#     collection = collection1 + collection2
+#     return collection
     
 def portfolio_val(collection, querys):
     capital_gains = 0
@@ -136,6 +136,6 @@ def calc_capital_gain(stock, current_price):
     return float((current_price - stock_purchase_price) * shares)
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 8080)) # default to 5001 if PORT is not set
+    port = int(os.environ.get('PORT', 8080)) # default to 8080 if PORT is not set
     print(f'running stocks portfolio server on port {port}')
     app.run(host='0.0.0.0', port=port, debug=True)

@@ -20,6 +20,8 @@ spec:
           imagePullPolicy: IfNotPresent # Use local image if available
           ports:
             - containerPort: 8000
-          env:
-            - name: PORT # Environment variable for flask
+          env: # Environment variable for flask
+            - name: COLLECTION_NAME
+              value: "collection1"
+            - name: PORT
               value: "8000"

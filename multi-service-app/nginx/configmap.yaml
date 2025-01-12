@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-config
+  namespace: stocks-app
+data:
+  nginx.conf: |
+    events {
+      worker_connections 1024;
+    }
+    http {
+      upstream stocks_backend {
+        server stocks-service:8000;
+      }
+      upstream capital_gains_backend {
+        server capital-gains-service:8080;
+      }
+      server {
+        listen 80;
+        location /stocks {
+          proxy_pass http://stocks_backend;
+        }
+        location /capital-gains {
+          proxy_pass http://capital_gains_backend;
+        }
+      }
+    }
