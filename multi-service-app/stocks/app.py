@@ -106,7 +106,13 @@ def date_validation(input_date):
         return False
 
     try:
-        datetime.strptime(input_date, "%d-%m-%Y") # ensures the input date matches the format - day-month-year
+        parsed_date = datetime.strptime(input_date, "%d-%m-%Y") # ensures the input date matches the format - day-month-year
+        current_year = datetime.now().year
+
+        # Ensure the year is within a valid, reasonable, range
+        if parsed_date.year < 1900 or parsed_date.year > current_year:
+            return False
+        
         return True
         
     except ValueError:
