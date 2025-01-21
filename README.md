@@ -1,1 +1,1 @@
-# project3-k8s
+# Multi-service stocks application using Kubernetes
