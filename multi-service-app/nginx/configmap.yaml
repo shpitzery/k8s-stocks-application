@@ -20,6 +20,12 @@ data:
         location /stocks {
           proxy_pass http://stocks_backend;
         }
+        location /stock-value {
+          proxy_pass http://stocks_backend;
+        }
+        location /portfolio-value {
+          proxy_pass http://stocks_backend;
+        }
         location /capital-gains {
           proxy_pass http://capital_gains_backend;
         }
