@@ -25,7 +25,7 @@ collection = db[collection_name]
 # __name__ is passed to Flask to set up paths and configurations correctly. It refers to the name of the current module.
 app = Flask(__name__)
 
-api_key = '0PXN/a3qirsKqQ+iGyUKtQ==JFuy0pu9YuMBLCks'
+api_key = '<your api key>'
 url = 'https://api.api-ninjas.com/v1/stockprice'
 
 def validation(stock, rqst):
