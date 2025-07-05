@@ -58,7 +58,6 @@ Before deploying the application, ensure you have the following tools installed:
   * [Docker](https://docs.docker.com/engine/install/)
   * [kind](https://kind.sigs.k8s.io/docs/user/quick-start/)
   * [kubectl](https://kubernetes.io/docs/tasks/tools/)
-  * [yq](https://github.com/mikefarah/yq/#install) (version 4.x)
 
 ## Getting Started
 
