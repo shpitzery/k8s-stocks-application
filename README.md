@@ -1,8 +1,10 @@
-# Cloud Computing K8s Home Assignment
+# Multi-Service Kubernetes Application
 
 ## Introduction
 
-This repository contains the solution for a Kubernetes home assignment for the Cloud Computing course at Reichman University. The assignment focuses on deploying a multi-service application using Kubernetes, building upon previous experience with Docker Compose. It provides hands-on experience with fundamental Kubernetes concepts, including Deployments, Services, ConfigMaps, and Persistent Volumes, to manage application availability, scalability, and networking within a cluster.
+A Kubernetes-based deployment of a multi-service financial analytics platform. 
+The platform focuses on deploying a multi-service application using Kubernetes, building upon previous experience with Docker Compose. 
+It demonstrates fundamental Kubernetes concepts, including Deployments, Services, ConfigMaps, reverse proxies using NGINX, and Persistent storage, to manage application availability, scalability, and networking within a cluster.
 
 ## Project Structure
 
