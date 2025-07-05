@@ -1,7 +1,3 @@
-Here's a README file for your project and a paragraph for your CV, based on the provided content:
-
-## README.md
-
 # Cloud Computing K8s Home Assignment
 
 ## Introduction
