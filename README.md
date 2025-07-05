@@ -66,7 +66,7 @@ Follow these steps to deploy and test the multi-service application on a local K
 ### 1\. Clone the Repository
 
 ```bash
-git clone https://github.com/yanivNaor92/cloud-computing-k8s-assignment
+git clone (https://github.com/shpitzery/k8s-stocks-application.git)
 cd cloud-computing-k8s-assignment
 ```
 
