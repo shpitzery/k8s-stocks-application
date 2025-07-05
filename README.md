@@ -67,7 +67,6 @@ Follow these steps to deploy and test the multi-service application on a local K
 
 ```bash
 git clone https://github.com/shpitzery/k8s-stocks-application.git
-cd cloud-computing-k8s-assignment
 ```
 
 ### 2\. Create a KIND Cluster
