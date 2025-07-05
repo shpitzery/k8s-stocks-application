@@ -38,13 +38,15 @@ The project is organized to deploy a multi-service application, with each micro-
 
 ## Architecture
 
-The deployed system implements a multi-service architecture as depicted in the diagram below. All micro-services (NGINX, stocks, capital-gains, database) are exposed to network traffic by Kubernetes `Service` resources.
+The deployed system implements a multi-service architecture as depicted in the diagram below. 
+All micro-services (NGINX, stocks, capital-gains, database) are exposed to network traffic by Kubernetes `Service` resources.
 
 ![Architecture Diagram](architecture.png)
 
 ### Services Implemented:
 
-  * **Stocks Service**: Two instances of a stock service providing a REST API for stock management, with load balancing handled by a Kubernetes Service to distribute traffic evenly. Data persistence is ensured through integration with the database.
+  * **Stocks Service**: Two instances of a stock service providing a REST API for stock management, with load balancing handled by a Kubernetes Service to distribute traffic evenly.
+  * Data persistence is ensured through integration with the database.
   * **Capital Gains Service**: A single instance of a capital gains service, communicating with the stocks service to perform calculations.
   * **NGINX Service**: Configured as a reverse proxy to route external requests to the appropriate internal services (stocks, capital-gains) based on the request path.
   * **Database Service**: Utilized for data persistence for the stocks service, ensuring data retention across Pod restarts and crashes. This service leverages Kubernetes `PersistentVolume` and `PersistentVolumeClaim` for reliable storage.
