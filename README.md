@@ -85,7 +85,7 @@ kubectl cluster-info
 
 ### 3\. Create a Namespace in the Cluster
 
-Without a namespace, all resources go into the default namespace.
+Without a namespace, all resources go into the default namespace.<br>
 To create the namespace in the cluster, run the following command:
 ```bash
 kubectl apply -f namespace.yaml
