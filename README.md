@@ -98,14 +98,18 @@ Navigate into the `multi-service-app` directory. For the `stocks` and `capital-g
 From the `cloud-computing-k8s-assignment` directory:
 
 ```bash
-cd multi-service-app
-# Example for stocks service (repeat for capital-gains)
-docker build -t stocks-app:latest ./stocks
-kind load docker-image stocks-app:latest
-# For capital-gains, replace 'stocks' with 'capital-gains'
-docker build -t capital-gains-app:latest ./capital-gains
-kind load docker-image capital-gains-app:latest
+docker build -t stocks:latest -f ./multi-service-app/stocks/Dockerfile ./multi-service-app/stocks
+kind load docker-image stocks:latest
+
+docker build -t capital-gains:latest -f ./multi-service-app/capital-gains/Dockerfile ./multi-service-app/capital-gains
+kind load docker-image capital-gains:latest
 ```
+
+In the command `docker build -t <service name>:latest -f ./multi-service-app/<service name>/Dockerfile ./multi-service-app/<service name>`:
+
+* `<service name>:latest`: The **tag** for the Docker image that will be built. It assigns a name (`<service name>`) and a version (`latest`) to the image, for easy reference later.
+* `-f ./capital-gains/Dockerfile`: This specifies the **path to the Dockerfile** that Docker should use for building the image.
+* `./capital-gains`: This is the **build context**. It tells Docker where to look for the files and directories that should be included in the build process.
 
 **Important**: Ensure `imagePullPolicy: IfNotPresent` is set in your Deployment YAMLs to use the locally loaded images.
 
