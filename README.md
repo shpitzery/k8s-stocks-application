@@ -83,7 +83,15 @@ Verify the `kubectl` context is set to your new cluster:
 kubectl cluster-info
 ```
 
-### 3\. Build and Load Docker Images
+### 3\. Create a Namespace in the Cluster
+
+Without a namespace, all resources go into the default namespace.
+To create the namespace in the cluster, run the following command:
+```bash
+kubectl apply -f namespace.yaml
+```
+
+### 4\. Build and Load Docker Images
 
 Navigate into the `multi-service-app` directory. For the `stocks` and `capital-gains` services, you will need to build their Docker images and load them into the Kind cluster. For NGINX and MongoDB, public images can be used.
 
@@ -101,7 +109,7 @@ kind load docker-image capital-gains-app:latest
 
 **Important**: Ensure `imagePullPolicy: IfNotPresent` is set in your Deployment YAMLs to use the locally loaded images.
 
-### 4\. Deploy Kubernetes Resources
+### 5\. Deploy Kubernetes Resources
 
 Deploy the Kubernetes resources (Namespace, Deployments, Services, PersistentVolume, PersistentVolumeClaim, ConfigMap) in the specified order. Remember to replace `<namespace-name>` with your chosen namespace.
 
@@ -123,7 +131,7 @@ kubectl apply -f nginx/service.yaml
 
 **Note**: Make sure all resources are deployed within the same non-`default` namespace.
 
-### 5\. Verify Deployment Status
+### 6\. Verify Deployment Status
 
 Check the status of your Pods:
 
@@ -138,7 +146,7 @@ kubectl get pods <pod-name> -n <your-namespace-name> -o yaml
 kubectl logs <pod-name> -n <your-namespace-name> -c <container-name>
 ```
 
-### 6\. Test the Application
+### 7\. Test the Application
 
 The application's REST API should be accessible via `http://127.0.0.1:80/`, which is handled by the NGINX reverse proxy.
 
@@ -172,7 +180,7 @@ You can use `curl` or a web browser to test the endpoints.
     ```
     The data should still be present, demonstrating persistence.
 
-### 7\. Run Sanity Test Script
+### 8\. Run Sanity Test Script
 
 A `test-submission.sh` script is provided to perform a basic sanity test of your deployment. Ensure the `multi-service-app` folder is in the same directory as the script.
 
