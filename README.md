@@ -11,7 +11,7 @@ It demonstrates fundamental Kubernetes concepts, including Deployments, Services
 The project is organized to deploy a multi-service application, with each micro-service having its dedicated folder containing its code, Dockerfile, and Kubernetes YAML manifests. The overall structure is as follows:
 
 ```plaintext
-├── services/
+├── multi-service-app/
 │   ├── namespace.yaml
 │   ├── stocks/
 │   │   ├── deployment.yaml
