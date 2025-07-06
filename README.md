@@ -105,7 +105,7 @@ docker build -t capital-gains:latest -f ./multi-service-app/capital-gains/Docker
 kind load docker-image capital-gains:latest
 ```
 
-In the command `docker build -t <service_name>:latest -f ./multi-service-app/<service_name>/Dockerfile ./multi-service-app/<service_name>`:
+**note**: In the command `docker build -t <service_name>:latest -f ./multi-service-app/<service_name>/Dockerfile ./multi-service-app/<service_name>`:
 
 * `<service_name>:latest`: The **tag** for the Docker image that will be built. It assigns a name (`<service_name>`) and a version (`latest`) to the image, for easy reference later.
 * `-f ./<service_name>/Dockerfile`: This specifies the **path to the Dockerfile** that Docker should use for building the image.
@@ -115,24 +115,13 @@ In the command `docker build -t <service_name>:latest -f ./multi-service-app/<se
 
 ### 5\. Deploy Kubernetes Resources
 
-Deploy the Kubernetes resources (Namespace, Deployments, Services, PersistentVolume, PersistentVolumeClaim, ConfigMap) in the specified order. Remember to replace `<namespace-name>` with your chosen namespace.
-
+You should use the `kubectl apply` command to deploy your resources into your cluster. Ensure you are targeting your desired cluster.
+To streamline the deployment, use the provided `deploy_app.sh` script by running the below commands, which applies all Kubernetes resources in the correct order.
 ```bash
-# From the multi-service-app directory
-kubectl apply -f namespace.yaml
-kubectl apply -f database/persistentVolume.yaml
-kubectl apply -f database/persistentVolumeClaim.yaml
-kubectl apply -f database/deployment.yaml
-kubectl apply -f database/service.yaml
-kubectl apply -f stocks/deployment.yaml
-kubectl apply -f stocks/service.yaml
-kubectl apply -f capital-gains/deployment.yaml
-kubectl apply -f capital-gains/service.yaml
-kubectl apply -f nginx/configmap.yaml
-kubectl apply -f nginx/deployment.yaml
-kubectl apply -f nginx/service.yaml
+# From the root directory
+chmod +x deploy_app.sh
+./deploy_app.sh
 ```
-
 **Note**: Make sure all resources are deployed within the same non-`default` namespace.
 
 ### 6\. Verify Deployment Status
