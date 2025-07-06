@@ -88,7 +88,7 @@ kubectl cluster-info
 Without a namespace, all resources go into the default namespace.<br>
 To create the namespace in the cluster, run the following command:
 ```bash
-kubectl apply -f namespace.yaml
+kubectl apply -f ./multi-service-app/namespace.yaml
 ```
 
 ### 4\. Build and Load Docker Images
