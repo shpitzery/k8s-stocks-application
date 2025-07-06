@@ -95,7 +95,9 @@ kubectl apply -f ./multi-service-app/namespace.yaml
 
 Navigate into the `multi-service-app` directory. For the `stocks` and `capital-gains` services, you will need to build their Docker images and load them into the Kind cluster. For NGINX and MongoDB, public images can be used.
 
-From the root directory:
+**Important**: Ensure `imagePullPolicy: IfNotPresent` is set in your Deployment YAMLs to use the locally loaded images.
+
+From the root directory run:
 
 ```bash
 docker build -t stocks:latest -f ./multi-service-app/stocks/Dockerfile ./multi-service-app/stocks
@@ -111,7 +113,6 @@ kind load docker-image capital-gains:latest
 * `-f ./<service_name>/Dockerfile`: This specifies the **path to the Dockerfile** that Docker should use for building the image.
 * `./<service_name>`: This is the **build context**. It tells Docker where to look for the files and directories that should be included in the build process.
 
-**Important**: Ensure `imagePullPolicy: IfNotPresent` is set in your Deployment YAMLs to use the locally loaded images.
 
 ### 5\. Deploy Kubernetes Resources
 
