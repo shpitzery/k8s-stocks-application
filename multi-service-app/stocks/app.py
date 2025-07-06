@@ -25,6 +25,7 @@ collection = db[collection_name]
 # __name__ is passed to Flask to set up paths and configurations correctly. It refers to the name of the current module.
 app = Flask(__name__)
 
+# Note: It is recommended to store sensitive information like API keys in environment variables or a secure vault, not hardcoded in the code.
 api_key = '<your api key>'
 url = 'https://api.api-ninjas.com/v1/stockprice'
 
