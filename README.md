@@ -122,7 +122,7 @@ To streamline the deployment, use the provided `deploy_app.sh` script by running
 chmod +x deploy_app.sh
 ./deploy_app.sh
 ```
-**Note**: Make sure all resources are deployed within the same non-`default` namespace.
+**Note**: Make sure all resources are deployed within the same non-default namespace.
 
 ### 6\. Verify Deployment Status
 
@@ -133,8 +133,7 @@ Validate your resource (Pod, Deployment, Service, etc.) was created as expected 
 kubectl get <resource-name> -n <resource-namespace> -o yaml 
 ```
 
-After you deploy all the required resources of each microservice, proceed to the next step and test that the system is functioning as expected.
-Validate that all of your resources, especially your Pods, were created successfully.
+**Important**: Make sure to validate your Pods were created successfully.<br>
 Run the following command to get all the Pods in a specific namespace:
 
 ```bash
