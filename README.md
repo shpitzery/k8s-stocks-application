@@ -200,16 +200,16 @@ You can use `curl` or a web browser to test the endpoints.
 
 ### 8\. Run Sanity Test Script
 
-A `test-submission.sh` script is provided to perform a basic sanity test of your deployment. Ensure the `multi-service-app` folder is in the same directory as the script.
+Run `test.sh` script to perform a basic sanity test of the deployment. Ensure the `multi-service-app` folder is in the same directory as the script.
 
 ```bash
-bash test-submission.sh
+bash test.sh
 ```
 
 Optional arguments:
 
 ```bash
-bash test-submission.sh --timeout 300 --skip-create-cluster
+bash test.sh --timeout 300 --skip-create-cluster
 ```
 
   * `timeout`: Maximum seconds to wait for Pods to become running (default: 300).
