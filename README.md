@@ -105,7 +105,7 @@ docker build -t capital-gains:latest -f ./multi-service-app/capital-gains/Docker
 kind load docker-image capital-gains:latest
 ```
 
-**note**: In the command `docker build -t <service_name>:latest -f ./multi-service-app/<service_name>/Dockerfile ./multi-service-app/<service_name>`:
+**Note**: In the command `docker build -t <service_name>:latest -f ./multi-service-app/<service_name>/Dockerfile ./multi-service-app/<service_name>`:
 
 * `<service_name>:latest`: The **tag** for the Docker image that will be built. It assigns a name (`<service_name>`) and a version (`latest`) to the image, for easy reference later.
 * `-f ./<service_name>/Dockerfile`: This specifies the **path to the Dockerfile** that Docker should use for building the image.
@@ -126,17 +126,42 @@ chmod +x deploy_app.sh
 
 ### 6\. Verify Deployment Status
 
-Check the status of your Pods:
+Validate your resource (Pod, Deployment, Service, etc.) was created as expected by running the following command:
 
 ```bash
-kubectl get pods -n <your-namespace-name>
+# Example: kubectl get pods -n <namespace-name> -o yaml
+kubectl get <resource-name> -n <resource-namespace> -o yaml 
 ```
 
-All Pods should eventually show a `STATUS` of `Running`. If any Pod is not running, you can inspect its details and logs for debugging:
+After you deploy all the required resources of each microservice, proceed to the next step and test that the system is functioning as expected.
+Validate that all of your resources, especially your Pods, were created successfully.
+Run the following command to get all the Pods in a specific namespace:
 
 ```bash
-kubectl get pods <pod-name> -n <your-namespace-name> -o yaml
-kubectl logs <pod-name> -n <your-namespace-name> -c <container-name>
+kubectl get pods -n <namespace-name>
+```
+
+The output should look as follows:
+```bash
+NAME                             READY   STATUS    RESTARTS   AGE
+stocks-6d967d75cb-72xrw          1/1     Running   0          11h
+stocks-6d967d75cb-ug84r          1/1     Running   0          11h
+capital-gains-1d947a758b-g7bjj   1/1     Running   0          11h
+nginx-5er68d65c9-tnsst           1/1     Running   0          11h
+mongo-2q93yd1514-tbasyn          1/1     Running   0          11h
+```
+
+**Note**: All Pods should eventually show a `STATUS` of `Running`. If one of the Pods is not in the Running status, you should investigate what might cause it.
+You can view the Pod's definition and its status by running the following command:
+
+```bash
+kubectl get pods <pod-name> -n <namespace-name> -o yaml
+```
+
+The status section usually contains useful information about the Pod's health and the error description (if it exists).
+If the Pod's container prints any logs, you can view them by running the following command:
+```bash
+kubectl logs <pod-name> -n <namespace-name> -c <container-name>
 ```
 
 ### 7\. Test the Application
