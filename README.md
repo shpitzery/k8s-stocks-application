@@ -177,7 +177,7 @@ You can use `curl` or a web browser to test the endpoints.
 
 1.  Add some stock data:
     ```bash
-    curl -X POST -H "Content-Type: application/json" -d '{"symbol": "GOOGL", "shares": 10}' http://127.0.0.1:80/stocks
+    curl -X POST -H "Content-Type: application/json" -d '{"symbol": "GOOGL", "purchase price": 20.0, "shares": 10}' http://127.0.0.1:80/stocks
     ```
 2.  Retrieve stock data:
     ```bash
